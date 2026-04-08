@@ -160,19 +160,36 @@
     </section>
 
     <section id="contact" class="container contact-section">
-        <h2 class="section-title reveal">Connect With Me</h2>
-        <p class="section-subtitle reveal">Reach out through social profiles or email.</p>
-        <div class="contact-grid">
-            <a class="social-card reveal" href="mailto:saugatsapkota28@gmail.com?subject=Portfolio%20Contact">
-                <i class="ri-mail-send-line"></i>
-                <h3>Email</h3>
-                <p>saugatsapkota28@gmail.com</p>
-            </a>
-            <a class="social-card reveal" href="https://github.com/rein-f/" target="_blank" rel="noopener">
-                <i class="ri-github-line"></i>
-                <h3>GitHub</h3>
-                <p>See my code projects</p>
-            </a>
+        <h2 class="section-title reveal">Contact Me</h2>
+        <p class="section-subtitle reveal">Send me a message directly, or connect through my social profiles.</p>
+        <div class="contact-layout">
+            <form class="contact-form reveal" action="https://formspree.io/f/xjgpzeeo" method="POST">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" required>
+
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="6" placeholder="Tell me about your project..." required></textarea>
+
+                <input type="hidden" name="_subject" value="New Portfolio Contact">
+                <button class="btn" type="submit">Send Message</button>
+                <p id="contactStatus" class="contact-status" role="status" aria-live="polite"></p>
+            </form>
+
+            <div class="contact-grid">
+                <a class="social-card reveal" href="mailto:saugatsapkota28@gmail.com?subject=Portfolio%20Contact">
+                    <i class="ri-mail-send-line"></i>
+                    <h3>Email</h3>
+                    <p>saugatsapkota28@gmail.com</p>
+                </a>
+                <a class="social-card reveal" href="https://github.com/rein-f/" target="_blank" rel="noopener">
+                    <i class="ri-github-line"></i>
+                    <h3>GitHub</h3>
+                    <p>See my code projects</p>
+                </a>
+            </div>
         </div>
     </section>
     

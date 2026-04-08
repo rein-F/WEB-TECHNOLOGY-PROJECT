@@ -61,7 +61,6 @@ html{
     background: #fff;
     transition: transform .25s ease, opacity .25s ease;
 }
-
 .nav-menu{
     width: 100%;
     display: grid;
@@ -542,6 +541,78 @@ section .header{
     padding-top: 2.5rem;
 }
 
+.contact-layout{
+    display: grid;
+    grid-template-columns: minmax(320px, 1fr) auto;
+    justify-content: center;
+    align-items: start;
+    gap: 1.4rem;
+}
+
+.contact-form{
+    background: linear-gradient(165deg, rgba(39,39,42,0.95), rgba(24,24,27,0.9));
+    border: 1px solid rgba(147, 197, 253, 0.25);
+    border-radius: 16px;
+    padding: 1.15rem;
+    display: grid;
+    gap: .6rem;
+}
+
+.contact-form label{
+    color: #e4e4e7;
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+.contact-form input,
+.contact-form textarea{
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 10px;
+    color: #fff;
+    padding: .72rem .78rem;
+    font-family: inherit;
+    font-size: .95rem;
+    transition: border-color .25s ease, box-shadow .25s ease, background-color .25s ease;
+}
+
+.contact-form textarea{
+    min-height: 140px;
+    resize: vertical;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder{
+    color: #8a8a93;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+    border-color: rgba(147, 197, 253, 0.85);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    background: rgba(255,255,255,0.06);
+}
+
+.contact-form .btn{
+    margin-top: .25rem;
+    justify-self: start;
+}
+
+.contact-status{
+    min-height: 1.35rem;
+    font-size: .9rem;
+    color: #c4c4cb;
+}
+
+.contact-status.success{
+    color: #86efac;
+}
+
+.contact-status.error{
+    color: #fca5a5;
+}
+
 .contact-grid{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 320px));
@@ -940,6 +1011,9 @@ footer .column > a:hover{
     .contact-grid{
         grid-template-columns: repeat(2, minmax(220px, 320px));
     }
+    .contact-layout{
+        grid-template-columns: 1fr;
+    }
     .project-card:hover{transform: translateY(-6px) scale(1.04);}
     .project-card:hover .project-image img{transform: scale(1.12);}
 }
@@ -1047,6 +1121,10 @@ footer .column > a:hover{
 
     .contact-grid{
         grid-template-columns: 1fr;
+    }
+
+    .contact-form .btn{
+        width: 100%;
     }
 
     .go-top-btn{

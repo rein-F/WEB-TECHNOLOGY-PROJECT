@@ -137,6 +137,50 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const contactForm = document.querySelector('.contact-form');
+    const contactStatus = document.getElementById('contactStatus');
+
+    if (contactForm && contactStatus) {
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const defaultButtonText = submitButton ? submitButton.textContent : 'Send Message';
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!submitButton) return;
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+            contactStatus.classList.remove('success', 'error');
+            contactStatus.textContent = 'Submitting your message...';
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: contactForm.method,
+                    body: new FormData(contactForm),
+                    headers: {
+                        Accept: 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    contactStatus.classList.add('success');
+                    contactStatus.textContent = 'Message sent successfully. Thank you!';
+                    contactForm.reset();
+                } else {
+                    contactStatus.classList.add('error');
+                    contactStatus.textContent = 'Could not send right now. Please try again in a moment.';
+                }
+            } catch (error) {
+                contactStatus.classList.add('error');
+                contactStatus.textContent = 'Network error. Please check your connection and try again.';
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = defaultButtonText;
+            }
+        });
+    }
+
     const reveals = document.querySelectorAll('.reveal');
     if (!reveals.length) return;
 
