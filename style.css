@@ -547,15 +547,19 @@ section .header{
     line-height: 1.35;
 }
 
-.project-card:hover .project-status-popover,
-.project-card:focus-within .project-status-popover{
+.project-status-chip{
+    cursor: pointer;
+}
+
+.project-status-chip:hover ~ .project-status-popover,
+.project-card:has(.project-status-chip:hover) .project-status-popover{
     opacity: 1;
     visibility: visible;
     transform: translateY(0) rotateX(0deg) scale(1);
 }
 
-.project-card:hover .project-status-popover::before,
-.project-card:focus-within .project-status-popover::before{
+.project-status-chip:hover ~ .project-status-popover::before,
+.project-card:has(.project-status-chip:hover) .project-status-popover::before{
     opacity: 1;
 }
 
@@ -849,10 +853,10 @@ section .header{
 
 /* Resume */
 .resume-grid{
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
 }
 
 .resume-actions{
@@ -902,6 +906,98 @@ section .header{
 
 .resume-card p, .resume-card li{
     color: #ccc;
+}
+
+.resume-info-panel{
+    background: linear-gradient(160deg, rgba(39,39,42,0.96), rgba(24,24,27,0.92));
+    border-color: rgba(147, 197, 253, 0.26);
+    box-shadow: 0 16px 40px -28px rgba(15,23,42,0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.resume-head{
+    margin-bottom: 1.5rem;
+}
+
+.resume-head h3{
+    font-size: 1.6rem;
+    margin-bottom: .5rem;
+    background: linear-gradient(135deg, #bfdbfe, #93c5fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.resume-head p{
+    color: #a1a1aa;
+    font-size: .95rem;
+    line-height: 1.6;
+}
+
+.resume-actions-vertical{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.resume-actions-vertical .btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    font-size: .95rem;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all .3s ease;
+}
+
+.resume-actions-vertical .btn i{
+    font-size: 1.1rem;
+}
+
+.resume-actions-vertical .btn:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -10px rgba(29, 78, 216, 0.9);
+}
+
+.resume-highlights{
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(147, 197, 253, 0.15);
+}
+
+.resume-highlights h4{
+    color: #93c5fd;
+    font-size: 0.9rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.highlights-list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .65rem;
+}
+
+.highlights-list li{
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    color: #d4d4d8;
+    font-size: .95rem;
+    line-height: 1.6;
+}
+
+.highlight-icon{
+    color: #60a5fa;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
 .skills-panel{
@@ -997,6 +1093,220 @@ section .header{
     height: 100%;
     border-radius: inherit;
     background: linear-gradient(90deg, #3b82f6, #60a5fa);
+}
+
+/* Certifications */
+#certifications.container {
+    max-width: 1440px;
+    padding-top: 1rem;
+}
+
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.certification-card {
+    background: linear-gradient(160deg, rgba(39,39,42,0.96), rgba(24,24,27,0.92));
+    border: 1px solid rgba(147, 197, 253, 0.25);
+    border-radius: 16px;
+    padding: 0;
+    transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    will-change: transform;
+    position: relative;
+    overflow: hidden;
+}
+
+.certification-preview {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background: rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(147, 197, 253, 0.15);
+    overflow: hidden;
+}
+
+.certification-preview iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    box-sizing: border-box;
+}
+
+.preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all .3s ease;
+    backdrop-filter: blur(0px);
+}
+
+.certification-preview:hover .preview-overlay {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+}
+
+.preview-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: #1d4ed8;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.2rem;
+    transition: all .3s ease;
+    box-shadow: 0 8px 20px -8px rgba(29, 78, 216, 0.9);
+}
+
+.preview-link:hover {
+    background: #1e40af;
+    transform: scale(1.1);
+}
+
+.certification-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.certification-badge {
+    display: none;
+}
+
+.certification-badge i {
+    font-size: 1.4rem;
+    color: #fff;
+}
+
+@keyframes certBadgeFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes certBadgePulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.certification-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(147, 197, 253, 0.6);
+    box-shadow: 0 12px 32px -10px rgba(29, 78, 216, 0.8), 0 0 0 1px rgba(147, 197, 253, 0.15);
+}
+
+.certification-card:hover .certification-badge {
+    animation: certBadgePulse .6s ease-in-out;
+}
+
+.certification-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    margin-bottom: 0.7rem;
+}
+
+.certification-header i {
+    font-size: 1.4rem;
+    color: #93c5fd;
+    min-width: 1.4rem;
+    text-align: center;
+}
+
+.certification-header h3 {
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.certification-course {
+    color: #93c5fd;
+    font-size: .85rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    margin-bottom: .5rem;
+}
+
+.certification-issuer {
+    color: #d4d4d8;
+    font-size: .8rem;
+    margin-bottom: .3rem;
+}
+
+.certification-date {
+    color: #a1a1aa;
+    font-size: .75rem;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(147, 197, 253, 0.15);
+}
+
+.certification-desc {
+    color: #b4b4bb;
+    font-size: .85rem;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+    flex-grow: 1;
+}
+
+.certification-desc-box {
+    background: rgba(147, 197, 253, 0.08);
+    border-left: 3px solid rgba(147, 197, 253, 0.5);
+    padding: 0.7rem;
+    border-radius: 8px;
+    margin-bottom: 0.8rem;
+    flex-grow: 1;
+}
+
+.certification-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .5rem 0.8rem;
+    border-radius: 6px;
+    background: linear-gradient(135deg, rgba(29, 78, 216, 0.3), rgba(30, 64, 175, 0.15));
+    border: 1px solid rgba(147, 197, 253, 0.4);
+    color: #bfdbfe;
+    font-size: .8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .25s ease;
+}
+
+.certification-link:hover {
+    background: linear-gradient(135deg, rgba(29, 78, 216, 0.5), rgba(30, 64, 175, 0.3));
+    border-color: rgba(147, 197, 253, 0.7);
+    color: #dbeafe;
+    transform: translateX(2px);
+}
+
+.certification-link i {
+    font-size: .75rem;
 }
 
 /* Contact */
@@ -1451,9 +1761,19 @@ footer .column > a:hover{
     .projects-grid{
         grid-template-columns: repeat(2, 1fr);
     }
+    .certifications-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .certification-preview {
+        height: 160px;
+    }
     .experience-layout{
         grid-template-columns: 1fr;
         gap: 1.2rem;
+    }
+    .resume-grid{
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     .experience-list{
         border-left: none;
@@ -1614,6 +1934,17 @@ footer .column > a:hover{
     }
     .projects-grid{
         grid-template-columns: repeat(1, 1fr);
+    }
+    .project-status-popover{
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+    .certifications-grid{
+        grid-template-columns: 1fr;
+    }
+    .certification-preview {
+        height: 150px;
     }
     .experience-list{
         grid-template-columns: 1fr;
