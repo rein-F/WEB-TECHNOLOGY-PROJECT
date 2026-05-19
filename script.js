@@ -25,6 +25,28 @@ updateKathmandTime();
 setInterval(updateKathmandTime, 1000);
 
 document.addEventListener('DOMContentLoaded', () => {
+    const scrollProgressBar = document.querySelector('.scroll-progress-bar');
+    let scrollTicking = false;
+
+    const updateScrollProgress = () => {
+        if (!scrollProgressBar) return;
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 1;
+        scrollProgressBar.style.transform = `scaleX(${progress})`;
+        scrollTicking = false;
+    };
+
+    const onScroll = () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        window.requestAnimationFrame(updateScrollProgress);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
     const goTopBtn = document.getElementById('goTopBtn');
 
     const updateGoTopVisibility = () => {

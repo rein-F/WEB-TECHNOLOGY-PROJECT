@@ -27,6 +27,50 @@ body{
 html{
     scroll-behavior: smooth;
 }
+
+*{
+    scrollbar-width: thin;
+    scrollbar-color: rgba(147, 197, 253, 0.75) rgba(24, 24, 27, 0.85);
+}
+
+*::-webkit-scrollbar{
+    width: 10px;
+}
+
+*::-webkit-scrollbar-track{
+    background: rgba(24, 24, 27, 0.85);
+}
+
+*::-webkit-scrollbar-thumb{
+    background: linear-gradient(180deg, #60a5fa, #1d4ed8);
+    border-radius: 999px;
+    border: 2px solid rgba(24, 24, 27, 0.85);
+}
+
+*::-webkit-scrollbar-thumb:hover{
+    background: linear-gradient(180deg, #93c5fd, #1e40af);
+}
+
+.scroll-progress{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    z-index: 300;
+}
+
+.scroll-progress-bar{
+    display: block;
+    height: 100%;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: linear-gradient(90deg, #38bdf8, #1d4ed8);
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+    transition: transform 0.1s ease-out;
+}
 .nav-cta{
     display: flex;
     flex-direction: row;
@@ -129,6 +173,37 @@ nav{
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
 }
+
+@property --glow-angle{
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+nav::before{
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 16px;
+    padding: 2px;
+    background: conic-gradient(from var(--glow-angle), transparent 0deg, rgba(59, 130, 246, 0.7) 90deg, rgba(147, 197, 253, 0.9) 180deg, rgba(29, 78, 216, 0.7) 270deg, transparent 360deg);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.85;
+    pointer-events: none;
+    animation: navOutlineGlow 4.5s linear infinite;
+}
+
+@keyframes navOutlineGlow{
+    0%{
+        --glow-angle: 0deg;
+    }
+
+    100%{
+        --glow-angle: 360deg;
+    }
+}
 .nav-links{
     grid-column: 2;
     list-style: none;
@@ -226,9 +301,40 @@ header .content h1{
     line-height: 1.15;
 }
 
-header .content h1 span{
+.name-outline{
+    position: relative;
+    display: inline-block;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 1px #fff;
+}
+
+@property --name-glow-angle{
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+.name-outline::after{
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(147, 197, 253, 0.9);
+    filter: drop-shadow(0 0 8px rgba(147, 197, 253, 0.7)) drop-shadow(0 0 18px rgba(59, 130, 246, 0.4));
+    -webkit-mask-image: conic-gradient(from var(--name-glow-angle), transparent 0deg, #000 40deg, transparent 80deg);
+    mask-image: conic-gradient(from var(--name-glow-angle), transparent 0deg, #000 40deg, transparent 80deg);
+    animation: nameOutlineSweep 6.5s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes nameOutlineSweep{
+    0%{
+        --name-glow-angle: 0deg;
+    }
+
+    100%{
+        --name-glow-angle: 360deg;
+    }
 }
 
 header .content p{
